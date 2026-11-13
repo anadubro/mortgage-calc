@@ -1,0 +1,42 @@
+/* Базовые стили, чтобы всё работало. Замени на свои из макета. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; color: #fff; min-height: 100vh;
+  background: linear-gradient(160deg, #060b1c, #0d1b45 60%, #0a1230); }
+.page { max-width: 980px; margin: 0 auto; padding: 0 20px 40px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+.logo { font-size: 24px; font-weight: 700; }
+.nav { display: flex; gap: 14px; } .nav a { padding: 6px 18px; border-radius: 16px; background: #0f1738; cursor: pointer; }
+.hero { text-align: center; padding: 30px 0; }
+.badge { display: inline-block; padding: 4px 16px; border-radius: 14px; background: #2b3a78; font-size: 13px; }
+.hero h1 { font-size: 40px; margin: 18px 0 10px; }
+.hero em { font-style: normal; color: #a78bfa; }
+.hero p { opacity: .6; }
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.card { background: rgba(255,255,255,.06); border-radius: 36px; padding: 32px; border: 1px solid rgba(255,255,255,.1); }
+.card.wide { margin-top: 28px; }
+.card-title { font-size: 18px; margin-bottom: 20px; }
+.card-sub { margin: 22px 0 10px; opacity: .7; }
+.field { margin-bottom: 18px; }
+.field-head { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; opacity: .85; }
+.field-box { display: flex; align-items: center; height: 44px; border-radius: 22px; background: #0a1028;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,.6); padding: 0 6px; }
+.field-prefix { padding: 0 14px; opacity: .5; }
+.field-input { flex: 1; height: 32px; border: 0; outline: 0; border-radius: 16px; padding: 0 14px;
+  background: #d5d8e6; color: #0a1028; font-size: 15px; }
+.segment { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.segment-btn, .btn { border: 0; cursor: pointer; color: #fff; background: #0f1738;
+  box-shadow: 0 3px 8px rgba(0,0,0,.5); border-radius: 18px; padding: 8px 16px; font-size: 14px; }
+.segment-btn.is-active { box-shadow: inset 0 0 0 1px #8b7cf6, 0 0 12px rgba(139,124,246,.5); }
+.btn { display: block; width: 100%; padding: 16px; margin-top: 12px; font-size: 18px; }
+.btn-main { margin-top: 24px; font-size: 15px; }
+.hero-result { background: #0a1028; border-radius: 20px; padding: 24px; text-align: center; display: grid; gap: 8px; }
+.hero-result strong { font-size: 40px; } .hero-result small { opacity: .7; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.stat { background: #0a1028; border-radius: 14px; padding: 12px 14px; display: grid; gap: 6px; }
+.stat span { font-size: 12px; opacity: .7; } .bad { color: #ff5d7a; }
+.table-wrap { max-height: 420px; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid rgba(255,255,255,.08); }
+th { position: sticky; top: 0; background: #0d1535; } th:first-child, td:first-child { text-align: left; }
+.footer { text-align: center; opacity: .4; font-size: 13px; margin-top: 40px; }
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } .hero h1 { font-size: 30px; } }
