@@ -1,0 +1,65 @@
+/* Manrope: основной текст */
+@font-face {
+  font-family: "Manrope";
+  src: url("./Manrope/Manrope-Regular.ttf") format("TrueType");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./Manrope/Manrope-Medium.ttf") format("TrueType");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./Manrope/Manrope-SemiBold.ttf") format("TrueType");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./Manrope/Manrope-Bold.ttf") format("TrueType");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Unbounded: Заголовки и акцентный текст */
+@font-face {
+  font-family: "Unbounded";
+  src: url("./Unbounded/Unbounded-Regular.ttf") format("TrueType");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Unbounded";
+  src: url("./Unbounded/Unbounded-Medium.ttf") format("TrueType");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Unbounded";
+  src: url("./Unbounded/Unbounded-SemiBold.ttf") format("TrueType");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Unbounded";
+  src: url("./Unbounded/Unbounded-Bold.ttf") format("TrueType");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

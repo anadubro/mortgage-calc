@@ -50,16 +50,18 @@ export function ResultPanel({ params, result, rate2, result2, onShowChart, onSho
       {result2 && rate2 !== null && (
         <div className="compare">
           <p className="card-sub">Сравнение ставок</p>
-          <table className="compare-table">
-            <thead>
-              <tr><th></th><th>{params.rate}%</th><th>{rate2}%</th><th>Разница</th></tr>
-            </thead>
-            <tbody>
-              <CompareRow label={isDiff ? 'Первый платёж' : 'Платёж'} a={result.firstPayment} b={result2.firstPayment} />
-              <CompareRow label="Переплата" a={result.totalInterest} b={result2.totalInterest} />
-              <CompareRow label="Общая выплата" a={result.totalPayment} b={result2.totalPayment} />
-            </tbody>
-          </table>
+          <div className="compare-scroll">
+            <table className="compare-table">
+              <thead>
+                <tr><th></th><th>{params.rate}%</th><th>{rate2}%</th><th>Разница</th></tr>
+              </thead>
+              <tbody>
+                <CompareRow label={isDiff ? 'Первый платёж' : 'Платёж'} a={result.firstPayment} b={result2.firstPayment} />
+                <CompareRow label="Переплата" a={result.totalInterest} b={result2.totalInterest} />
+                <CompareRow label="Общая выплата" a={result.totalPayment} b={result2.totalPayment} />
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

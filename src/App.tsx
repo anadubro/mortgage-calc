@@ -23,14 +23,15 @@ export default function App() {
   return (
     <div className="page">
       <header className="topbar">
-        <div className="logo">MortgageCalc</div>
-        <nav className="nav"><a>Калькулятор</a><a>Сравнить</a><a>Гид</a></nav>
+        <div className="logo">
+          <img src="./public/logo.svg" alt="Логотип" width='50' height='50' />
+          <p>MortgageCalc</p>
+        </div>
       </header>
 
       <section className="hero">
-        <span className="badge">Точный расчёт за 30 секунд</span>
         <h1>Ипотека без <em>скрытых цифр</em></h1>
-        <p>Ежемесячный платёж, переплата и сравнение сценариев — сразу</p>
+        <p>Ежемесячный платёж, переплата и сравнение сценариев</p>
       </section>
 
       <main className="layout">

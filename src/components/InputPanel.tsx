@@ -26,17 +26,17 @@ export function InputPanel({ params, downAmount, update, onCalculate, rate2, onA
       <h2 className="card-title">Параметры кредита</h2>
 
       <div className="field">
-        <div className="field-head"><span>Стоимость недвижимости</span><b>{formatMoney(params.price)}</b></div>
+        <div className="field-head"><span>Стоимость недвижимости</span><span className="field-params">{formatMoney(params.price)}</span></div>
         <Field prefix="₽" value={params.price} onChange={v => update({ price: v })} />
       </div>
 
       <div className="field">
-        <div className="field-head"><span>Первоначальный взнос</span><b>{params.downPct}% · {formatMoney(downAmount)}</b></div>
+        <div className="field-head"><span>Первоначальный взнос</span><span className="field-params">{params.downPct}% · {formatMoney(downAmount)}</span></div>
         <Field prefix="%" value={params.downPct} onChange={v => update({ downPct: v })} />
       </div>
 
       <div className="field">
-        <div className="field-head"><span>Процентная ставка</span><b>{params.rate}% годовых</b></div>
+        <div className="field-head"><span>Процентная ставка</span><span className="field-params">{params.rate}% годовых</span></div>
         <Field prefix="%" value={params.rate} onChange={v => update({ rate: v })} />
       </div>
 
@@ -48,7 +48,7 @@ export function InputPanel({ params, downAmount, update, onCalculate, rate2, onA
         <div className="field field-compare">
           <div className="field-head">
             <span>Вторая ставка (пунктир на графике)</span>
-            <button type="button" className="link-btn" onClick={onRemoveRate2}>Убрать</button>
+            <button type="button" className="del-btn" onClick={onRemoveRate2}>Убрать</button>
           </div>
           <Field prefix="%" value={rate2} onChange={onChangeRate2} />
         </div>
