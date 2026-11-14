@@ -8,6 +8,10 @@ interface Props {
   downAmount: number
   update: (p: Partial<Params>) => void
   onCalculate: () => void
+  rate2: number | null
+  onAddRate2: () => void
+  onChangeRate2: (v: number) => void
+  onRemoveRate2: () => void
 }
 
 const YEARS = [5, 10, 15, 20, 25, 30].map(y => ({ label: String(y), value: y }))
@@ -16,7 +20,7 @@ const TYPES = [
   { label: 'Дифференцированный', value: 'diff' as const },
 ]
 
-export function InputPanel({ params, downAmount, update, onCalculate }: Props) {
+export function InputPanel({ params, downAmount, update, onCalculate, rate2, onAddRate2, onChangeRate2, onRemoveRate2 }: Props) {
   return (
     <section className="card">
       <h2 className="card-title">Параметры кредита</h2>
@@ -35,6 +39,20 @@ export function InputPanel({ params, downAmount, update, onCalculate }: Props) {
         <div className="field-head"><span>Процентная ставка</span><b>{params.rate}% годовых</b></div>
         <Field prefix="%" value={params.rate} onChange={v => update({ rate: v })} />
       </div>
+
+      {rate2 === null ? (
+        <button type="button" className="btn btn-ghost" onClick={onAddRate2}>
+          + Добавить вариант с другой ставкой
+        </button>
+      ) : (
+        <div className="field field-compare">
+          <div className="field-head">
+            <span>Вторая ставка (пунктир на графике)</span>
+            <button type="button" className="link-btn" onClick={onRemoveRate2}>Убрать</button>
+          </div>
+          <Field prefix="%" value={rate2} onChange={onChangeRate2} />
+        </div>
+      )}
 
       <div className="field">
         <div className="field-head"><span>Срок кредита</span></div>

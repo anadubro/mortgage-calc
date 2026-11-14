@@ -4,12 +4,27 @@ import { formatMoney, formatPct } from '../utils/mortgage'
 interface Props {
   params: Params
   result: Result
+  rate2: number | null
+  result2: Result | null
   onShowChart: () => void
-  onToggleTable: () => void
-  tableOpen: boolean
+  onShowTable: () => void
 }
 
-export function ResultPanel({ params, result, onShowChart, onToggleTable, tableOpen }: Props) {
+// Строка сравнения: разница = второй вариант минус первый. Меньше — лучше (зелёный)
+function CompareRow({ label, a, b }: { label: string; a: number; b: number }) {
+  const d = b - a
+  const sign = d === 0 ? '' : d > 0 ? '+' : '−'
+  return (
+    <tr>
+      <td>{label}</td>
+      <td>{formatMoney(a)}</td>
+      <td>{formatMoney(b)}</td>
+      <td className={d < 0 ? 'good' : d > 0 ? 'bad' : ''}>{sign}{formatMoney(Math.abs(d))}</td>
+    </tr>
+  )
+}
+
+export function ResultPanel({ params, result, rate2, result2, onShowChart, onShowTable }: Props) {
   const isDiff = params.type === 'diff'
   const label = isDiff ? 'Первый платёж' : 'Ежемесячный платёж'
   const sub = `${isDiff ? 'Дифференцированный' : 'Аннуитетный'} · ${params.years} лет · ${params.rate}%`
@@ -32,11 +47,25 @@ export function ResultPanel({ params, result, onShowChart, onToggleTable, tableO
         <div className="stat"><span>Ставка переплаты</span><b className="bad">{formatPct(result.overpaymentPct)}</b></div>
       </div>
 
+      {result2 && rate2 !== null && (
+        <div className="compare">
+          <p className="card-sub">Сравнение ставок</p>
+          <table className="compare-table">
+            <thead>
+              <tr><th></th><th>{params.rate}%</th><th>{rate2}%</th><th>Разница</th></tr>
+            </thead>
+            <tbody>
+              <CompareRow label={isDiff ? 'Первый платёж' : 'Платёж'} a={result.firstPayment} b={result2.firstPayment} />
+              <CompareRow label="Переплата" a={result.totalInterest} b={result2.totalInterest} />
+              <CompareRow label="Общая выплата" a={result.totalPayment} b={result2.totalPayment} />
+            </tbody>
+          </table>
+        </div>
+      )}
+
       <p className="card-sub">Подробная информация</p>
       <button type="button" className="btn" onClick={onShowChart}>Посмотреть на графике</button>
-      <button type="button" className="btn" onClick={onToggleTable}>
-        {tableOpen ? 'Скрыть график платежей' : 'График платежей'}
-      </button>
+      <button type="button" className="btn" onClick={onShowTable}>График платежей</button>
     </section>
   )
 }

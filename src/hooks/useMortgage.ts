@@ -10,7 +10,12 @@ const clamp = (v: number, [min, max]: readonly [number, number]) => Math.min(max
 
 export function useMortgage() {
   const [params, setParams] = useState<Params>(DEFAULTS)
+  // Вторая ставка для сравнения. null — сравнение выключено
+  const [rate2, setRate2] = useState<number | null>(null)
+
   const result = useMemo(() => calc(params), [params])
+  // Второй вариант: все параметры те же, отличается только ставка
+  const result2 = useMemo(() => (rate2 === null ? null : calc({ ...params, rate: rate2 })), [params, rate2])
 
   const update = (patch: Partial<Params>) =>
     setParams(prev => {
@@ -24,5 +29,9 @@ export function useMortgage() {
       }
     })
 
-  return { params, result, update }
+  const addRate2 = () => setRate2(Math.max(0.1, +(params.rate - 2).toFixed(1)))
+  const changeRate2 = (v: number) => setRate2(clamp(v, LIMITS.rate))
+  const removeRate2 = () => setRate2(null)
+
+  return { params, result, update, rate2, result2, addRate2, changeRate2, removeRate2 }
 }
