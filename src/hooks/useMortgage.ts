@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { DEFAULTS, type Params } from '../types'
+import { DEFAULTS, type Params, type Variant } from '../types'
 import { calc } from '../utils/mortgage'
 
 const LIMITS = {
@@ -10,12 +10,15 @@ const clamp = (v: number, [min, max]: readonly [number, number]) => Math.min(max
 
 export function useMortgage() {
   const [params, setParams] = useState<Params>(DEFAULTS)
-  // Вторая ставка для сравнения. null — сравнение выключено
-  const [rate2, setRate2] = useState<number | null>(null)
+  // Второй вариант (своя цена и ставка). null — сравнение выключено
+  const [variant2, setVariant2] = useState<Variant | null>(null)
 
   const result = useMemo(() => calc(params), [params])
-  // Второй вариант: все параметры те же, отличается только ставка
-  const result2 = useMemo(() => (rate2 === null ? null : calc({ ...params, rate: rate2 })), [params, rate2])
+  // Остальные параметры (взнос %, срок, тип) берём из основной формы
+  const result2 = useMemo(
+    () => (variant2 === null ? null : calc({ ...params, price: variant2.price, rate: variant2.rate })),
+    [params, variant2],
+  )
 
   const update = (patch: Partial<Params>) =>
     setParams(prev => {
@@ -29,9 +32,18 @@ export function useMortgage() {
       }
     })
 
-  const addRate2 = () => setRate2(Math.max(0.1, +(params.rate - 2).toFixed(1)))
-  const changeRate2 = (v: number) => setRate2(clamp(v, LIMITS.rate))
-  const removeRate2 = () => setRate2(null)
+  const addVariant2 = () =>
+    setVariant2({ price: params.price, rate: Math.max(0.1, +(params.rate - 2).toFixed(1)) })
 
-  return { params, result, update, rate2, result2, addRate2, changeRate2, removeRate2 }
+  const changeVariant2 = (patch: Partial<Variant>) =>
+    setVariant2(prev =>
+      prev && {
+        price: patch.price !== undefined ? clamp(patch.price, LIMITS.price) : prev.price,
+        rate: patch.rate !== undefined ? clamp(patch.rate, LIMITS.rate) : prev.rate,
+      },
+    )
+
+  const removeVariant2 = () => setVariant2(null)
+
+  return { params, result, update, variant2, result2, addVariant2, changeVariant2, removeVariant2 }
 }

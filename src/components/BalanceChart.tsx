@@ -4,15 +4,15 @@ import { formatMoney } from '../utils/mortgage'
 
 interface Props {
   data: YearPoint[]
-  rate: number
-  data2?: YearPoint[]   // данные второго варианта (если включено сравнение)
-  rate2?: number
+  label: string          // подпись первого варианта, например "8,5 млн ₽ · 16.5%"
+  data2?: YearPoint[]    // второй вариант (если включено сравнение)
+  label2?: string
 }
 
-export function BalanceChart({ data, rate, data2, rate2 }: Props) {
+export function BalanceChart({ data, label, data2, label2 }: Props) {
   const tick = { fill: 'rgba(255,255,255,0.6)', fontSize: 12 }
 
-  // Склеиваем два варианта в одну таблицу: balance/paidInterest и balance2/paidInterest2
+  // Склеиваем варианты в одну таблицу: balance/paidInterest и balance2/paidInterest2
   const merged = data.map((p, i) => ({
     year: p.year,
     balance: p.balance,
@@ -33,13 +33,13 @@ export function BalanceChart({ data, rate, data2, rate2 }: Props) {
           contentStyle={{ background: '#0b1230', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 12 }}
         />
         <Legend />
-        <Line type="monotone" dataKey="balance" name={`Остаток долга (${rate}%)`} stroke="#33c20a" strokeWidth={2.5} dot={false} />
-        <Line type="monotone" dataKey="paidInterest" name={`Проценты (${rate}%)`} stroke="#e11d1d" strokeWidth={2.5} dot={false} />
+        <Line type="monotone" dataKey="balance" name={`Остаток · ${label}`} stroke="#33c20a" strokeWidth={2.5} dot={false} />
+        <Line type="monotone" dataKey="paidInterest" name={`Проценты · ${label}`} stroke="#e11d1d" strokeWidth={2.5} dot={false} />
         {data2 && (
-          <Line type="monotone" dataKey="balance2" name={`Остаток долга (${rate2}%)`} stroke="#33c20a" strokeWidth={2.5} strokeDasharray="8 6" dot={false} />
+          <Line type="monotone" dataKey="balance2" name={`Остаток · ${label2}`} stroke="#33c20a" strokeWidth={2.5} strokeDasharray="8 6" dot={false} />
         )}
         {data2 && (
-          <Line type="monotone" dataKey="paidInterest2" name={`Проценты (${rate2}%)`} stroke="#e11d1d" strokeWidth={2.5} strokeDasharray="8 6" dot={false} />
+          <Line type="monotone" dataKey="paidInterest2" name={`Проценты · ${label2}`} stroke="#e11d1d" strokeWidth={2.5} strokeDasharray="8 6" dot={false} />
         )}
       </LineChart>
     </ResponsiveContainer>
