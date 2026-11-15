@@ -46,7 +46,6 @@ export default function App() {
           <img src="./public/logo.svg" alt="Логотип" width="50" height="50" />
           <p>MortgageCalc</p>
           </div>
-        <nav className="nav"><a>Калькулятор</a><a>Сравнить</a><a>Гид</a></nav>
       </header>
 
       <section className="hero">
