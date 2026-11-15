@@ -34,4 +34,10 @@ export interface Result {
   yearly: YearPoint[]
 }
 
+// Второй вариант для сравнения: своя стоимость и своя ставка (взнос %, срок и тип платежа общие)
+export interface Variant {
+  price: number
+  rate: number
+}
+
 export const DEFAULTS: Params = { price: 8_500_000, downPct: 20, rate: 16.5, years: 20, type: 'annuity' }
